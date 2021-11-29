@@ -1,0 +1,9 @@
+# IntelliJ debris
+.idea
+*.iml
+
+# Vagrant debris
+.vagrant
+
+# Runtime debris
+*.log
