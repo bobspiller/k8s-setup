@@ -1,8 +1,16 @@
-# Kubernetes cluster setup with Vagrant and Ansible
+# Kubernetes cluster setup with Kubeadm and Vagrant
 
-Based on [Creating a cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/).
+## Overview
 
-[comment]: <> (Based on this blog post [Kubernetes Setup Using Ansible and Vagrant]&#40;https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/&#41;.)
+This project sets up a local kubernertes cluster using Vagrant, kubeadm and Calico.
+
+Based on:
+
+* [Creating a cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+
+* [Quickstart for Calico on Kubernetes](https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart)
+
+## Tricks
 
 ## Add indented line to text after line matching a pattern
 
@@ -129,7 +137,7 @@ This appears to have made a difference!
 
 ```
 ➜  k8s-setup-kubeadm git:(master) ✗ vagrant version
-\Installed Version: 2.2.19
+Installed Version: 2.2.19
 Latest Version: 2.2.19
 
 You're running an up-to-date version of Vagrant!
