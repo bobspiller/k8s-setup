@@ -2,6 +2,13 @@
 
 echo "===== $0"
 
+echo ">>>>> Checking of a proxy TLS certificate is configured ..."
+if [ -f "/vagrant/config/proxy.crt" ]; then
+  echo ">>>>> Installing proxy TLS certificate ..."
+  sudo cp /vagrant/config/proxy.crt /usr/local/share/ca-certificates/
+  sudo /usr/sbin/update-ca-certificates
+fi
+
 echo ">>>>> Checking if module br_netfilter is present ..."
 lsmod | grep -q br_netfilter
 if [ $? -ne 0 ]; then
