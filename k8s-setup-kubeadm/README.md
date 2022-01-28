@@ -10,6 +10,27 @@ Based on:
 
 * [Quickstart for Calico on Kubernetes](https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart)
 
+## Design
+
+Network addresses.
+
+| CIDR           | Role            | Notes                      |
+|----------------|-----------------|----------------------------|
+| 10.240.10.0/24 | Node Network    |                            |
+| 10.240.20.0/24 | Service Network |                            |
+| 192.168.0.0/16 | Pod Network     | Calico default pod network |
+
+## Details
+
+By default creates three nodes
+
+| Hostname      | Role    | IP Address  |
+|---------------|---------|-------------|
+| k8s-control-1 | control | 10.240.1.10 |
+| k8s-node-1    | worker  | 10.240.1.11 |
+| k8s-node-2    | worker  | 10.240.1.11 |
+| 
+
 ## Tricks
 
 ## Add indented line to text after line matching a pattern

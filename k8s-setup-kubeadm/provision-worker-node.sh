@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "===== $0"
+echo "===== provision-worker-node.sh"
 
 echo ">>>>> Joining $(hostname) to the cluster ..."
 sudo /vagrant/config/join.sh
 
-echo ">>>>> $0: done"
+echo ">>>>> provision-worker-node.sh: done"

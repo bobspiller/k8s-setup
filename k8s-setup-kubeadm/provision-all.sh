@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "===== $0"
+echo "===== provision-all.sh"
 
 echo ">>>>> Checking of a proxy TLS certificate is configured ..."
 if [ -f "/vagrant/config/proxy.crt" ]; then
@@ -103,4 +103,4 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-echo ">>>>> $0: done"
+echo ">>>>> provision-all.sh: done"

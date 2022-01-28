@@ -1,5 +1,5 @@
 IMAGE_NAME = "ubuntu/focal64"
-BASE_IP = "192.168.50"
+BASE_IP = "10.240.10"
 N_MASTERS = 1
 N_WORKERS = 2
 
@@ -32,5 +32,14 @@ Vagrant.configure("2") do |config|
             node.vm.hostname = "k8s-node-#{i}"
             node.vm.provision "shell", path: "./provision-worker-node.sh", privileged: false
         end
+    end
+
+    # sandbox host on the k8s network for use when local VPN policy prevents connection to the cluster from the host
+    config.vm.define "jump" do |jump|
+        NODE_IP = "#{BASE_IP}.#{9 + N_MASTERS + N_WORKERS + 1}"
+        jump.vm.box = IMAGE_NAME
+        jump.vm.network "private_network", ip: NODE_IP
+        jump.vm.hostname = "jump"
+        jump.vm.provision "shell", path: "./provision-jump.sh", privileged: false
     end
 end
