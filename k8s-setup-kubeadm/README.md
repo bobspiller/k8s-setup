@@ -24,12 +24,13 @@ Network addresses.
 
 By default creates three nodes
 
-| Hostname      | Role    | IP Address  |
-|---------------|---------|-------------|
-| k8s-control-1 | control | 10.240.1.10 |
-| k8s-node-1    | worker  | 10.240.1.11 |
-| k8s-node-2    | worker  | 10.240.1.11 |
-| 
+| Hostname      | Role      | IP Address  |
+|---------------|-----------|-------------|
+| k8s-control-1 | control   | 10.240.1.10 |
+| k8s-node-1    | worker    | 10.240.1.11 |
+| k8s-node-2    | worker    | 10.240.1.12 |
+| jump          | jump box  | 10.240.1.13 |
+
 
 ## Tricks
 

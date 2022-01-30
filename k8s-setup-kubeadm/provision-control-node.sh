@@ -21,11 +21,8 @@ if [ ! -d /vargrant/config ]; then
 fi
 cp $VAGRANT_HOME/.kube/config /vagrant/config/kubeconfig
 
-echo ">>>>> Installing the Calico operator ..."
-kubectl create -f /vagrant/tigera-operator.yaml
-
-echo ">>>>> Installing Calico CNI implementation ..."
-kubectl create -f /vagrant/calico-custom-resources.yaml
+echo ">>>>> Installing Calico networking ..."
+kubectl apply -f /vagrant/calico-3.18.6.yaml
 
 echo ">>>>> Generating join script for worker nodes ..."
 kubeadm token create --print-join-command > /vagrant/config/join.sh

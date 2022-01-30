@@ -2,6 +2,16 @@
 
 echo "===== provision-all.sh"
 
+#Versions
+K8S_VERSION=1.22.5-00
+
+echo ">>>>> Disable and turn off SWAP ..."
+sudo sed -i '/swap/d' /etc/fstab
+sudo swapoff -a
+
+echo ">>>>> Stop and Disable firewall ..."
+sudo systemctl disable --now ufw
+
 echo ">>>>> Checking of a proxy TLS certificate is configured ..."
 if [ -f "/vagrant/config/proxy.crt" ]; then
   echo ">>>>> Installing proxy TLS certificate ..."
@@ -78,18 +88,6 @@ sudo systemctl restart containerd
 echo ">>>>> Configure containerd to use systemd managed CGroups"
 sudo sed -i '/\.containerd\.runtimes\.runc\.options/a\ \ \ \ \ \ \ \ \ \ \ \ SystemdCgroup = true' /etc/containerd/config.toml
 
-echo ">>>>> Have kubeadm configure kubelet to use systemd managed CGroups"
-cat <<EOF | tee kubeadm-config.yaml
-# kubeadm-config.yaml
-kind: ClusterConfiguration
-apiVersion: kubeadm.k8s.io/v1beta3
-kubernetesVersion: v1.21.0
----
-kind: KubeletConfiguration
-apiVersion: kubelet.config.k8s.io/v1beta1
-cgroupDriver: systemd
-EOF
-
 echo ">>>>> Adding Google Cloud public signing key"
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
@@ -100,7 +98,15 @@ echo\
 
 echo ">>>>> Update apt package index, install kubelet, kubeadm and kubectl, and pin their version"
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet=${K8S_VERSION} kubeadm=${K8S_VERSION} kubectl=${K8S_VERSION}
 sudo apt-mark hold kubelet kubeadm kubectl
+
+echo ">>>>> Update /etc/hosts ..."
+sudo tee -a > /dev/null /etc/hosts <<EOF
+10.240.10.10  k8s-control-1
+10.240.10.11  k8s-node-1
+10.240.10.12  k8s-node-2
+10.240.10.13  jump
+EOF
 
 echo ">>>>> provision-all.sh: done"
