@@ -1,0 +1,5 @@
+---
+- name: common configuration
+  hosts: all
+  roles:
+   - roles/containerd

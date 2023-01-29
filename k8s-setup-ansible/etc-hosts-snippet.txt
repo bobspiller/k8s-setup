@@ -1,0 +1,3 @@
+# k8s-setup-ansible -- BEGIN
+127.0.0.1 k8s-control-1 k8s-node-1 k8s-node-2
+# k8s-setup-ansible -- END

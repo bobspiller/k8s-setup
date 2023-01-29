@@ -1,0 +1,35 @@
+BASE_IP = "10.240.10"
+N_MASTERS = 1
+N_WORKERS = 2
+BASE_SSHD_PORT = 2200
+
+Vagrant.configure("2") do |config|
+
+    config.vm.provider "docker" do |d|
+        d.image = "ubuntu-vagrant:22.04"
+        d.has_ssh = true
+        d.remains_running = true
+        d.create_args = ["--privileged"]
+    end
+
+    (1..N_MASTERS).each do |i|
+        config.vm.define "k8s-control-#{i}" do |control|
+            NODE_IP = "#{BASE_IP}.#{i + 9}"
+            SSHD_PORT = "#{BASE_SSHD_PORT + i}"
+            control.vm.network "forwarded_port", guest: 22, host: SSHD_PORT, id: "ssh"
+            control.vm.network "private_network", ip: NODE_IP
+            control.vm.hostname = "k8s-control-#{i}"
+            config.ssh.private_key_path = "insecure_vagrant_docker_id"
+        end
+    end
+
+    (1..N_WORKERS).each do |i|
+        config.vm.define "k8s-node-#{i}" do |node|
+            NODE_IP = "#{BASE_IP}.#{i + 9 + N_MASTERS}"
+            SSHD_PORT = "#{BASE_SSHD_PORT + N_MASTERS + i}"
+            node.vm.network "forwarded_port", guest: 22, host: SSHD_PORT, id: "ssh"
+            node.vm.network "private_network", ip: NODE_IP
+            node.vm.hostname = "k8s-node-#{i}"
+        end
+    end
+end

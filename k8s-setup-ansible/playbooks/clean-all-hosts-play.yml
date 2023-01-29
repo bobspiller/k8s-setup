@@ -1,0 +1,5 @@
+---
+- name: clean-up all hosts
+  hosts: all
+  roles:
+    - roles/containerd-rm

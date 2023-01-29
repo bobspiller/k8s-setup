@@ -1,0 +1,17 @@
+---
+
+- name: Stop and disable the containerd unit
+  ansible.builtin.systemd:
+    name: containerd
+    state: stopped
+    enabled: no
+
+- name: Remove containerd
+  ansible.builtin.package:
+    name: containerd
+    state: absent
+
+- name: Have systemd reload its state
+  ansible.builtin.systemd:
+    daemon_reload: yes
+

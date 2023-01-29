@@ -1,0 +1,24 @@
+---
+# We want to install fromo the Docker apt repository yeilds an up to date 1.6.x version
+# of containerd
+# Ubuntu's repository produces an old 1.5.x version
+#
+# See:
+# 
+# * https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd
+#
+# * https://github.com/containerd/containerd/blob/main/docs/getting-started.md
+# 
+# * https://docs.docker.com/engine/install/ubuntu/
+#
+
+# - name: Install containerd
+#   ansible.builtin.package:
+#     name: containerd
+#     state: latest
+
+# - name: Start and enable the containerd unit
+#   ansible.builtin.systemd:
+#     name: containerd
+#     state: started
+#     enabled: yes
