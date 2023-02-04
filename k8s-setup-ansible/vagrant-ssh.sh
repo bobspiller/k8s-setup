@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PORT=${PORT:-2222}
-IDENTITY_FILE=~/.vagrant.d/insecure_private_key
+IDENTITY_FILE=insecure_vagrant_docker_id
 VUSER=${VUSER:-vagrant}
 
 ssh -i ${IDENTITY_FILE} \

@@ -5,4 +5,4 @@ docker run -d \
   --name ubuntu-vagrant \
   --rm \
   -p 2222:22 \
-  ubuntu-vagrant:22.04
+  rockyos-vagrant:9.1
